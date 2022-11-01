@@ -22,7 +22,7 @@ const Details = ({ postDetails }: IProps) => {
   const [isPostingComment, setIsPostingComment] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
 
   const router = useRouter();
   const { userProfile }: any = useAuthStore();
@@ -66,6 +66,9 @@ const Details = ({ postDetails }: IProps) => {
       videoRef.current.muted = isVideoMuted;
     }
   }, [isVideoMuted]);
+  useEffect(() => {
+    videoRef?.current?.play();
+  }, []);
   if (!post) return <p>deo co post</p>;
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap ">
